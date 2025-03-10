@@ -1,5 +1,6 @@
 # TODO: Install the frontend dependency package into the app folder inside the container.
-FROM python:3.11
+FROM python:3.11-slim
+RUN groupadd -r appuser && useradd -r -g appuser appuser
 
 WORKDIR /app
 COPY requirements.txt .
