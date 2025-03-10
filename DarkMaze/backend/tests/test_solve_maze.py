@@ -5,6 +5,7 @@ USERNAME = "TestUser"
 RESET_URL = f"http://127.0.0.1:8000/api/v1/reset?username={USERNAME}"
 LOGIN_URL = f"http://127.0.0.1:8000/api/v1/login"
 MOVE_URL = "http://127.0.0.1:8000/api/v1/move"
+game_state = None
 
 async def login_request():
     """Simulates a frontend login."""
@@ -17,6 +18,7 @@ async def login_request():
     assert response.status_code == 200  # Ensure the request was successful
 
 async def reset_request():
+    global game_state
     """Reset Game state"""
 
     async with httpx.AsyncClient() as client:
@@ -28,6 +30,7 @@ async def reset_request():
 
 async def move_request(dir):
     """Simulates a frontend move request."""
+    global game_state
 
     payload = {"username": USERNAME, "direction": dir}
     
@@ -37,13 +40,13 @@ async def move_request(dir):
     assert response.status_code == 200  # Ensure the request was successful
     game_state = response.json()
     assert game_state["health"] >= 3
-    return game_state
+
 @pytest.mark.asyncio
 async def test_integration():
     await login_request()
     await reset_request()
     for _ in range(5):
-         game_state = await move_request("down")
+        await move_request("down")
     assert game_state["current_position"] == [1,5]
 
 @pytest.mark.asyncio
@@ -66,6 +69,6 @@ async def test_solver():
     ]
     
     for move in move_map:
-        game_state = await move_request(move)
+        await move_request(move)
 
     assert game_state["health"] == 666
