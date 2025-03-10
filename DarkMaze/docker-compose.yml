@@ -70,8 +70,7 @@ services:
     build: ./frontend
     ports:
       - "8088:8088"
-    command: uvicorn src.main:app --host "0.0.0.0" --port 8088 --reload
-
+    command: uvicorn src.main:app --host "0.0.0.0" --port 8088
   backend:
     # TODO:
     # 1. Create a container using the backend image.  
@@ -80,7 +79,7 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
-    command: uvicorn src.main:app --host "0.0.0.0" --port 8000 --reload
+    command: uvicorn src.main:app --host "0.0.0.0" --port 8000
 
 networks:
   sonar-network:
