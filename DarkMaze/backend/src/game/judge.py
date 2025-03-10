@@ -8,18 +8,18 @@ def _parse_map(map_string, map_size, reversal_nodes=[]):
     
     map_string = [bin(ord(c))[2:].zfill(8) for c in filtered_chars]
     
-    map = []
+    map_array = []
     for map_fragment in map_string:
         first_half = int(map_fragment[:4], 2)
         second_half = int(map_fragment[4:], 2)
-        map.extend([first_half % 2, second_half % 2])
+        map_array.extend([first_half % 2, second_half % 2])
     
-    while len(map) < width * height:
-        map.append(0)
+    while len(map_array) < width * height:
+        map_array.append(0)
     
-    map = map[:width * height]
+    map_array = map_array[:width * height]
     
-    swiper = np.array(map).reshape((height, width))
+    swiper = np.array(map_array).reshape((height, width))
     
     for x, y in reversal_nodes:
         if 0 <= x < height and 0 <= y < width:
