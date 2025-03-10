@@ -54,29 +54,7 @@ async def test_solver():
     await login_request()
     await reset_request()
 
-    move_map = [
-        "down",
-        "down",
-        "down",
-        "down",
-        "down",
-        "right",
-        "down",
-        "right",
-        "right",
-        "up",
-        "up",
-        "up",
-        "up",
-        "right",
-        "right",
-        "down",
-        "right",
-        "right",
-        "down",
-        "right",
-        "down"
-    ]
+    move_map = ["down"] * 5 + ["right", "down"] + ["right"] * 2 + ["up"] * 4 + ["right"] * 2 + ["down"] + ["right"] * 2 + ["down", "right", "down"]
     
     for move in move_map:
         await move_request(move)
