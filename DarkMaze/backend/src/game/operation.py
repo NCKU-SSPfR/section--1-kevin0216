@@ -19,7 +19,7 @@ def move_location(game_state, direction):
 
     new_position = [x, y]
 
-    if hit_obstacle(new_position, game_state["current_level_name"]):
+    if hit_obstacle(tuple(new_position), game_state["current_level_name"]):
         # Update health
         game_state["health"] -= 1
     else:

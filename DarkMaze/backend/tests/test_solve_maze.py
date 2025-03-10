@@ -3,7 +3,7 @@ import httpx
 
 USERNAME = "TestUser"
 RESET_URL = f"http://127.0.0.1:8000/api/v1/reset?username={USERNAME}"
-LOGIN_URL = f"http://127.0.0.1:8000/api/v1/login"
+LOGIN_URL = "http://127.0.0.1:8000/api/v1/login"
 MOVE_URL = "http://127.0.0.1:8000/api/v1/move"
 game_state = None
 
