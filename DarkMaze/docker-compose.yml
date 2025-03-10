@@ -71,6 +71,7 @@ services:
     ports:
       - "8088:8088"
     command: uvicorn src.main:app --host "0.0.0.0" --port 8088
+
   backend:
     # TODO:
     # 1. Create a container using the backend image.  
