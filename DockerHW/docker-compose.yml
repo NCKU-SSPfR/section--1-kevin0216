@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build:
-      dockerfile: ./web/Dockerfile
+      - ./web
     container_name: web
     volumes:
       - ./web:/app
