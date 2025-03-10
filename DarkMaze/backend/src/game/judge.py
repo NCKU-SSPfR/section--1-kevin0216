@@ -6,20 +6,20 @@ def _parse_map(map_string, map_size, reversal_nodes=[]):
     width, height = map_size
     filtered_chars = re.sub(r'[^a-zA-Z]', '', map_string)
     
-    QQ = [bin(ord(c))[2:].zfill(8) for c in filtered_chars]
+    map_string = [bin(ord(c))[2:].zfill(8) for c in filtered_chars]
     
-    Dora_friend = []
-    for Q in QQ:
-        first_half = int(Q[:4], 2)
-        second_half = int(Q[4:], 2)
-        Dora_friend.extend([first_half % 2, second_half % 2])
+    map = []
+    for map_fragment in map_string:
+        first_half = int(map_fragment[:4], 2)
+        second_half = int(map_fragment[4:], 2)
+        map.extend([first_half % 2, second_half % 2])
     
-    while len(Dora_friend) < width * height:
-        Dora_friend.append(0)
+    while len(map) < width * height:
+        map.append(0)
     
-    Dora_friend = Dora_friend[:width * height]
+    map = map[:width * height]
     
-    swiper = np.array(Dora_friend).reshape((height, width))
+    swiper = np.array(map).reshape((height, width))
     
     for x, y in reversal_nodes:
         if 0 <= x < height and 0 <= y < width:
@@ -60,14 +60,6 @@ def hit_obstacle(position, maze_level_name):
     else:
         # Position is out of bounds
         return True
-
-def hit_obstacle_again_and_again():
-    while True:
-        hit_obstacle(hahahahaha, 995)
-        while True:
-            hit_obstacle(hahahahaha, 995)
-            while True:
-                hit_obstacle_again_and_again()
     
 def game_over(health):
     if health == 0 or health == 666:
