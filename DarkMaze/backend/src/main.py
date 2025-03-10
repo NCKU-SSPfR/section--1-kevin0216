@@ -14,10 +14,10 @@ FRONTEND_URL = "http://localhost:8088"
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=[FRONTEND_URL],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
-    allow_headers=["*"],
+    allow_headers=["Content-Type", "Set-Cookie", "Authorization"],
 )
 
 class CookieManager:
@@ -89,6 +89,16 @@ async def logout(response: Response):
         "cookies": [],
         "status": 1
     })
+
+@app.get("/api/v1/health")
+async def health_check():
+    """Health check endpoint"""
+    try:
+        # Test database connection
+        get_latest_game_state("health_check")
+        return JSONResponse({"status": "healthy"})
+    except Exception as e:
+        return JSONResponse({"status": "unhealthy", "error": str(e)}, status_code=500)
 
 if __name__ == "__main__":
     import uvicorn
