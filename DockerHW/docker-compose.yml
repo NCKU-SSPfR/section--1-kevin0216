@@ -2,8 +2,7 @@ version: '3'
 
 services:
   web:
-    build:
-      - ./web
+    build: ./web
     container_name: web
     volumes:
       - ./web:/app
